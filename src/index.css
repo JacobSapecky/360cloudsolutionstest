@@ -11,7 +11,7 @@ body{
 
 .cards{
     min-width: 350px;
-    max-width: 500px;
+    max-width: 30vw;
     display: inline-block;
 }
 
@@ -21,4 +21,8 @@ body{
     row-gap: 10px;
     gap: 10px;
     justify-content: center;
+}
+
+.table{
+    background-color: aliceblue;
 }

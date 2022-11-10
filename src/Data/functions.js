@@ -9,25 +9,25 @@ export function DaysToBirthdate(index,employeeBirthday){ //In this simulated env
 }
 
 export function BestCustomer(internalid){
-    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === internalid});//narrows down he invoice data to the objects that only belongs to the employee.
+    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === internalid});//narrows down the invoice data to the objects that only belongs to the employee.
     if (filteredrevenue.length === 0) return "N/A"; 
     else{
-        let bestcustomer = filteredrevenue.sort((a,b)=>b.amount-a.amount)[0].customer;
-        employees[internalid-1].bestcustomer = bestcustomer;
+        let bestcustomer = filteredrevenue.sort((a,b)=>b.amount-a.amount)[0].customer; //sorts invoices by amount and then gets highest amount customer
+        employees[internalid-1].bestcustomer = bestcustomer; 
         return bestcustomer;
     }
 }
 
 export function Calculate2013records(internalid){
-    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === internalid});
-    let total = filteredrevenue.reduce((sum, invoice) => parseInt(invoice.amount) + sum, 0);
+    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === internalid}); //narrows down the invoice data to the objects that only belongs to the employee
+    let total = filteredrevenue.reduce((sum, invoice) => parseInt(invoice.amount) + sum, 0); //adds the amounts together of the filteredrevenue and stores it in the sum variable.
     employees[internalid-1].actual2013revenue = total.toFixed(2);
     return total.toFixed(2);
 }
 
 export function IsCommissionMet(index, total){
-    let commission = ((parseFloat(commissionRules[index].percentage)/100) * total)
-    if(total >= parseInt(employees[index]['2012 Revenue'])) commission += parseInt(commissionRules[index].bonus)
+    let commission = ((parseFloat(commissionRules[index].percentage)/100) * total) //calculates commission regardless if bonus requirement met
+    if(total >= parseInt(employees[index]['2012 Revenue'])) commission += parseInt(commissionRules[index].bonus) //checks if bonus requirement met, if so adds to employee's commission.
     return commission.toFixed(2);
 }
 

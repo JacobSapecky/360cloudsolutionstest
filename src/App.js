@@ -1,6 +1,6 @@
 
 import MainPage from './Pages/MainPage';
-import Invoice from './Components/Invoice';
+import Invoice from './Pages/Invoice';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 

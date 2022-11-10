@@ -3,7 +3,7 @@ import {DaysToBirthdate, BestCustomer, Calculate2013records, IsCommissionMet} fr
 import EmployeeCards from '../Components/EmployeeCards';
 
 export default function MainPage() {
-    let mappedemployees = employees.map((employee, index) =>{ 
+    let mappedemployees = employees.map((employee, index) =>{ //for each employee, run the functions and then pass the result to the EmployeeCards component.
         let daysUntilBirthday = DaysToBirthdate(index,new Date(employee.birthdate));
         let bestCustomer = BestCustomer(employee.internalid)
         let revenue2013 = Calculate2013records(employee.internalid)
