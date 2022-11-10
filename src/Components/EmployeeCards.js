@@ -9,7 +9,7 @@ export default function EmployeeCards(props) { //the props parameter is how the 
     <>
     <Card className="cards">
       <Card.Body>
-        <Card.Title><Link to='/invoice' state={{id: props.id}}>{props.name}</Link></Card.Title>
+        <Card.Title><Link to='/invoice' state={{id: props.id, name: props.name}}>{props.name}</Link></Card.Title>
         <Card.Text>
           <p>🎂Birthdate: {props.birthdate} </p>
           <p>🧁Days until birthday: {props.daysUntilBirthday} </p>
