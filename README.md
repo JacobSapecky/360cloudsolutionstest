@@ -32,6 +32,7 @@ To run the production environment:
     npm i --no-audit  <br/>
 	npm run build  <br/>
 	npm i serve --no-audit -g <br/>
+	serve -s build <br/>
 
 
 Thank you so much for considering me for this position. I look forward to meeting you!
