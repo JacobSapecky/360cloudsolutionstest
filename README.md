@@ -13,6 +13,24 @@ https://stackoverflow.com/questions/73932592/i-want-to-align-items-in-inline-fle
 https://www.simplilearn.com/tutorials/javascript-tutorial/array-reduce-javascript#:~:text=The%20array%20reduce%20in%20JavaScript,is%20stored%20in%20the%20accumulator
 https://stackoverflow.com/questions/4020796/finding-the-max-value-of-an-attribute-in-an-array-of-objects
 
+To run the development environment (is slower to initialize, but data can be added to the JSON objects):
+1.install Node.js https://nodejs.org/en/download/
+2.from the terminal in 360cloudsolutionstest folder:
+    npm i --no-audit
+    npm start
+
+
+To run the production environment:
+1. install Node.js if not already installed
+2. from the terminal in 360cloudsolutionstest folder
+    npm i --no-audit
+	npm run build
+	npm i serve --no-audit -g
+
+
+Thank you so much for considering me for this position. I look forward to meeting you!
+
+
 
 
 
