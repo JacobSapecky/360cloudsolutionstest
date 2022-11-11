@@ -5,7 +5,7 @@ body{
 }
 
 .title{
-    font-size: "56px";
+    font-size: "70px";
     text-align: center;
 }
 
@@ -25,4 +25,15 @@ body{
 
 .table{
     background-color: aliceblue;
+}
+
+
+.subtitle{
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bodytext{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
 }

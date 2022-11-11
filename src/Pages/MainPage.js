@@ -7,7 +7,7 @@ export default function MainPage() {
         let daysUntilBirthday = DaysToBirthdate(index,new Date(employee.birthdate));
         let bestCustomer = BestCustomer(employee.internalid)
         let revenue2013 = Calculate2013records(employee.internalid)
-        let commissionmet = IsCommissionMet(index, revenue2013)
+        let commissionmet = IsCommissionMet(employee.internalid, revenue2013)
         return(
           <EmployeeCards key ={employee.internalid}
           id = {employee.internalid}
@@ -25,7 +25,7 @@ export default function MainPage() {
       console.log(employees)
   return (
     <>
-    <h1 className="title" >Employee Dashboard</h1>
+    <h1 className="title" >Team Dashboard</h1>
     <div className="cardscontainer">
     {mappedemployees}
     </div>
