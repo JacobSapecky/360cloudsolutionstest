@@ -15,7 +15,7 @@ export default function Invoice() {
 
     const mappedinvoices = filteredinvoices.sort((a,b)=>b.amount-a.amount).map(invoice =>{ //create a row in the table for each invoice.
         return(
-        <tr>
+        <tr className="bodytext">
             <td>{invoice.customer}</td>
             <td>{formatter.format(invoice.amount)}</td>
         </tr>
@@ -25,7 +25,7 @@ export default function Invoice() {
     const teaminvoices = revenue2013.filter(invoice => {return employees[invoice.Employee -1].supervisor && employees[invoice.Employee -1].supervisor === internalID})
     const mappedteaminvoices = teaminvoices.sort((a,b)=>b.amount-a.amount).map(invoice =>{ //create a row in the table for each invoice.
         return(
-        <tr>
+        <tr className="bodytext">
             <td>{employees[invoice.Employee-1].name}</td>
             <td>{invoice.customer}</td>
             <td>{formatter.format(invoice.amount)}</td>
@@ -38,7 +38,7 @@ export default function Invoice() {
         <h1 className="title">{name}'s Invoices</h1>
         <Table className="table" striped bordered hover>
             <thead>
-                <tr>
+                <tr className="subtitle">
                     <th width="50%">Customer Name</th>
                     <th width="50%">Amount</th>
                 </tr>
@@ -48,12 +48,12 @@ export default function Invoice() {
             </tbody>
         </Table>
 
-        {!employees[internalID-1].supervisor ? 
+        {!employees[internalID-1].supervisor ? //task 6. If they are a supervisor, show their team's performance as a whole. (currently supports simple supervisor-employee relationships. i.e no nested relationships)
             <div>
             <h1 className="title">{name}'s Team Invoices</h1>
             <Table className="table" striped bordered hover>
                 <thead>
-                    <tr>
+                    <tr className="subtitle">
                         <th width="33%">Team Member</th>
                         <th width="33%">Customer Name</th>
                         <th width="33%">Amount</th>
