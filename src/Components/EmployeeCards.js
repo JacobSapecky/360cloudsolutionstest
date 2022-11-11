@@ -11,18 +11,17 @@ export default function EmployeeCards(props) { //the props parameter is how the 
     <Card className="cards">
       <Card.Body>
         <Card.Title><Link className="subtitle" to='/invoice' state={{key: props.id, id: props.id, name: props.name}}>{props.name}</Link></Card.Title>
-        <Card.Text classname="bodytext">
-          <p>🎂Birthdate: {props.birthdate} </p>
+        <div className='bodytext'>
+          <p>🎂Birthdate: {props.birthdate}</p>
           <p>🧁Days until birthday: {props.daysUntilBirthday} </p>
           <p>📧Email: <a href={"mailto:" + props.email}>{props.email}</a></p>
           <p>💵2012 Revenue: {formatter.format(props.twentytwelve)}</p>
           <p>💵2013 Revenue: {formatter.format(props.twentythirteen)}</p>
           <p>🧑Best Customer: {props.bestCustomer} </p>
           <p>💰Commission: {formatter.format(props.commissionmet)}</p>
-        </Card.Text>
+        </div>
       </Card.Body>
     </Card>
-
     </>
   )
   }
