@@ -6,6 +6,12 @@ The functions meet all requirements and are designed to easily accept additional
 
 I used VSCode to write this application. I used the chrome developer tools to debug. Furthermore, I tested adding employees in many different ways to find bugs and resolve them.
 
+The two additional tasks are:
+
+5. . Extension of task 2: Supervisor’s best customer should be based off their team’s best customer if the supervisor has not sold to a customer with a higher amount. If the supervisor has sold to a customer with a higher amount than any of their team member’s customers, then that should be their best customer.
+
+6. Employees should be able to easily view how teams are doing overall. If a supervisor's name is clicked it should show the supervisor's team invoices as well as the supervisor's individual invoices.
+
 References:
 
 https://renatello.com/javascript-day-of-year/
@@ -29,6 +35,7 @@ To run the production environment:
 
 
 Thank you so much for considering me for this position. I look forward to meeting you!
+
 
 
 

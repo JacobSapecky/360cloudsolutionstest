@@ -26,9 +26,9 @@ export default function MainPage() {
   return (
     <>
     <h1 className="title" >Team Dashboard</h1>
-    <div className="cardscontainer">
+    <section className="cardscontainer">
     {mappedemployees}
-    </div>
+    </section>
     </>
   )
 }
