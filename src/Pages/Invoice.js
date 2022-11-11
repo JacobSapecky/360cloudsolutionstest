@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
-import {revenue2013} from '../Data/exports'
+import {revenue2013, employees} from '../Data/exports'
+import { formatter } from '../Data/functions';
 import Table from 'react-bootstrap/Table';
 
 export default function Invoice() {
@@ -16,7 +17,18 @@ export default function Invoice() {
         return(
         <tr>
             <td>{invoice.customer}</td>
-            <td>${invoice.amount}</td>
+            <td>{formatter.format(invoice.amount)}</td>
+        </tr>
+        )
+    });
+
+    const teaminvoices = revenue2013.filter(invoice => {return employees[invoice.Employee -1].supervisor && employees[invoice.Employee -1].supervisor === internalID})
+    const mappedteaminvoices = teaminvoices.sort((a,b)=>b.amount-a.amount).map(invoice =>{ //create a row in the table for each invoice.
+        return(
+        <tr>
+            <td>{employees[invoice.Employee-1].name}</td>
+            <td>{invoice.customer}</td>
+            <td>{formatter.format(invoice.amount)}</td>
         </tr>
         )
     });
@@ -35,6 +47,23 @@ export default function Invoice() {
                 {mappedinvoices}
             </tbody>
         </Table>
+
+        {!employees[internalID-1].supervisor ? 
+            <div>
+            <h1 className="title">{name}'s Team Invoices</h1>
+            <Table className="table" striped bordered hover>
+                <thead>
+                    <tr>
+                        <th width="33%">Team Member</th>
+                        <th width="33%">Customer Name</th>
+                        <th width="33%">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {mappedteaminvoices}
+                </tbody>
+            </Table>
+            </div> : ""}
     </>
     )
 }
