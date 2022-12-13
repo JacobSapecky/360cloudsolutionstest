@@ -23,6 +23,8 @@ export default function MainPage() {
         )
       })
       console.log(employees)
+      const releasedate = new Date()
+      console.log("Date released:" + releasedate)
   return (
     <>
     <h1 className="title" >Team Dashboard</h1>
