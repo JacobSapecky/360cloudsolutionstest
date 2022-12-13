@@ -13,12 +13,13 @@ export function DaysToBirthdate(index,employeeBirthday){
     return empDaysUntilBirthday;
 }
 
-export function BestCustomer(internalid){
-    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
-    if (filteredrevenue.length === 0 && employees[internalid -1].supervisor) return "N/A"; //if they are not a supervisor and array length is 0, they do not have a customer yet.
+ export function BestCustomer(internalid){
+    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === employees[internalid].internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
+    if (filteredrevenue.length === 0 && employees[internalid].supervisor) return "N/A"; //if they are not a supervisor and array length is 0, they do not have a customer yet.
 
-    if (!employees[internalid - 1].supervisor){//if supervisor... (task 5)
-        let supervisorrevenue = revenue2013.filter(invoice => {return employees[invoice.Employee -1].supervisor && employees[invoice.Employee -1].supervisor === internalid}) //grabs all invoices of the supervisor's team.
+    if (!employees[internalid].supervisor){//if supervisor... (task 5)
+        let supervisorrevenue = revenue2013.filter(invoice => {return employees[(employees.findIndex(object => {
+            return object.internalid === invoice.Employee}))].supervisor === employees[internalid].internalid }) //grabs all invoices of the supervisor's team.
         let totalrevenue = supervisorrevenue.concat(filteredrevenue) //add to list supervisors sales
         if (totalrevenue.length === 0) return "N/A"; 
         else{
@@ -28,20 +29,21 @@ export function BestCustomer(internalid){
     }
     else{ //if not supervisor
         let bestcustomer = filteredrevenue.sort((a,b)=>b.amount-a.amount)[0].customer; //sorts invoices by amount and then gets the first customer in array (the highest invoice)
-        employees[internalid-1].bestcustomer = bestcustomer; 
+        employees[internalid].bestcustomer = bestcustomer; 
         return bestcustomer;
     }
 }
 
 export function Calculate2013records(internalid){
-    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
-    if(employees[internalid -1].supervisor){ //if not a supervisor
+    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === employees[internalid].internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
+    if(employees[internalid].supervisor){ //if not a supervisor
         let total = filteredrevenue.reduce((sum, invoice) => parseInt(invoice.amount) + sum, 0); //adds the amounts together of the employees invoices.
-        employees[internalid-1].actual2013revenue = total.toFixed(2);
+        employees[internalid].actual2013revenue = total.toFixed(2);
         return total.toFixed(2);
     }
     else{
-        let supervisorrevenue = revenue2013.filter(invoice => {return employees[invoice.Employee -1].supervisor && employees[invoice.Employee -1].supervisor === internalid})
+        let supervisorrevenue = revenue2013.filter(invoice => {return employees[(employees.findIndex(object => {
+            return object.internalid === invoice.Employee}))].supervisor === employees[internalid].internalid });
         let totalrevenue = supervisorrevenue.concat(filteredrevenue)
         let total = totalrevenue.reduce((sum, invoice) => parseInt(invoice.amount) + sum,0);
         return total.toFixed(2);
@@ -50,9 +52,9 @@ export function Calculate2013records(internalid){
 
 export function IsCommissionMet(internalid, total){
     for(let i = 0; i < commissionRules.length; i++){ //looping through to make sure they are a commission employee, otherwise commission = 0. I had to do it this way because if their was an employee added without a commission set there would be an error.
-        if (commissionRules[i].employee === internalid){
-            let commission = ((parseFloat(commissionRules[internalid-1].percentage)/100) * total) //calculates commission regardless if bonus requirement met
-            if(total >= parseInt(employees[internalid-1]['2012 Revenue'])) commission += parseInt(commissionRules[internalid-1].bonus) //checks if bonus requirement met, if so adds to employee's commission.
+        if (commissionRules[i].employee === employees[internalid].internalid){
+            let commission = ((parseFloat(commissionRules[i].percentage)/100) * total) //calculates commission regardless if bonus requirement met
+            if(total >= parseInt(employees[internalid]['2012 Revenue'])) commission += parseInt(commissionRules[i].bonus) //checks if bonus requirement met, if so adds to employee's commission.
             return commission.toFixed(2);
         }
     }
