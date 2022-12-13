@@ -24,6 +24,7 @@ export function DaysToBirthdate(index,employeeBirthday){
         if (totalrevenue.length === 0) return "N/A"; 
         else{
             let bestcustomer = totalrevenue.sort((a,b) => b.amount - a.amount)[0].customer; //sorts the invoices by amount, and gets the first customer in array (the highest invoice)
+            employees[internalid].bestcustomer = bestcustomer;
         return bestcustomer
         }
     }
@@ -46,6 +47,7 @@ export function Calculate2013records(internalid){
             return object.internalid === invoice.Employee}))].supervisor === employees[internalid].internalid });
         let totalrevenue = supervisorrevenue.concat(filteredrevenue)
         let total = totalrevenue.reduce((sum, invoice) => parseInt(invoice.amount) + sum,0);
+        employees[internalid].actual2013revenue = total.toFixed(2);
         return total.toFixed(2);
     }
 }
