@@ -5,12 +5,12 @@ import EmployeeCards from '../Components/EmployeeCards';
 export default function MainPage() {
     let mappedemployees = employees.map((employee, index) =>{ //for each employee, run the functions and then pass the result to the EmployeeCards component.
         let daysUntilBirthday = DaysToBirthdate(index,new Date(employee.birthdate));
-        let bestCustomer = BestCustomer(employee.internalid)
-        let revenue2013 = Calculate2013records(employee.internalid)
-        let commissionmet = IsCommissionMet(employee.internalid, revenue2013)
+        let bestCustomer = BestCustomer(index)
+        let revenue2013 = Calculate2013records(index)
+        let commissionmet = IsCommissionMet(index, revenue2013)
         return(
-          <EmployeeCards key ={employee.internalid}
-          id = {employee.internalid}
+          <EmployeeCards key ={index}
+          id = {index}
           name={employee.name}
           birthdate={employee.birthdate}
           email={employee.email}

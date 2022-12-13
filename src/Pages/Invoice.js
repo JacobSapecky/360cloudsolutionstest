@@ -10,7 +10,7 @@ export default function Invoice() {
     const name = location.state?.name;
 
     const filteredinvoices = revenue2013.filter(invoice => { //grab only the invoices that pertain to the employee
-        return invoice.Employee === internalID
+        return invoice.Employee === employees[internalID].internalid
     })
 
     const mappedinvoices = filteredinvoices.sort((a,b)=>b.amount-a.amount).map(invoice =>{ //create a row in the table for each invoice.
@@ -22,11 +22,13 @@ export default function Invoice() {
         )
     });
 
-    const teaminvoices = revenue2013.filter(invoice => {return employees[invoice.Employee -1].supervisor && employees[invoice.Employee -1].supervisor === internalID})
+    const teaminvoices = revenue2013.filter(invoice => {return employees[(employees.findIndex(object => {
+        return object.internalid === invoice.Employee}))].supervisor === employees[internalID].internalid })
     const mappedteaminvoices = teaminvoices.sort((a,b)=>b.amount-a.amount).map(invoice =>{ //create a row in the table for each invoice.
         return(
         <tr className="bodytext">
-            <td>{employees[invoice.Employee-1].name}</td>
+            <td>{employees[employees.findIndex(object => {
+        return object.internalid === invoice.Employee})].name}</td>
             <td>{invoice.customer}</td>
             <td>{formatter.format(invoice.amount)}</td>
         </tr>
@@ -47,8 +49,8 @@ export default function Invoice() {
                 {mappedinvoices}
             </tbody>
         </Table>
-
-        {!employees[internalID-1].supervisor ? //task 6. If they are a supervisor, show their team's performance as a whole. (currently supports simple supervisor-employee relationships. i.e no nested relationships)
+        
+        {!employees[internalID].supervisor ? //task 6. If they are a supervisor, show their team's performance as a whole. (currently supports simple supervisor-employee relationships. i.e no nested relationships)
             <div>
             <h1 className="title">{name}'s Team Invoices</h1>
             <Table className="table" striped bordered hover>
@@ -63,7 +65,7 @@ export default function Invoice() {
                     {mappedteaminvoices}
                 </tbody>
             </Table>
-            </div> : ""}
+    </div> : ""}
     </>
     )
 }
