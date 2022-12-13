@@ -13,50 +13,50 @@ export function DaysToBirthdate(index,employeeBirthday){
     return empDaysUntilBirthday;
 }
 
- export function BestCustomer(internalid){
-    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === employees[internalid].internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
-    if (filteredrevenue.length === 0 && employees[internalid].supervisor) return "N/A"; //if they are not a supervisor and array length is 0, they do not have a customer yet.
+ export function BestCustomer(index){
+    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === employees[index].internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
+    if (filteredrevenue.length === 0 && employees[index].supervisor) return "N/A"; //if they are not a supervisor and array length is 0, they do not have a customer yet.
 
-    if (!employees[internalid].supervisor){//if supervisor... (task 5)
+    if (!employees[index].supervisor){//if supervisor... (task 5)
         let supervisorrevenue = revenue2013.filter(invoice => {return employees[(employees.findIndex(object => {
-            return object.internalid === invoice.Employee}))].supervisor === employees[internalid].internalid }) //grabs all invoices of the supervisor's team.
+            return object.internalid === invoice.Employee}))].supervisor === employees[index].internalid }) //grabs all invoices of the supervisor's team.
         let totalrevenue = supervisorrevenue.concat(filteredrevenue) //add to list supervisors sales
         if (totalrevenue.length === 0) return "N/A"; 
         else{
             let bestcustomer = totalrevenue.sort((a,b) => b.amount - a.amount)[0].customer; //sorts the invoices by amount, and gets the first customer in array (the highest invoice)
-            employees[internalid].bestcustomer = bestcustomer;
+            employees[index].bestcustomer = bestcustomer;
         return bestcustomer
         }
     }
     else{ //if not supervisor
         let bestcustomer = filteredrevenue.sort((a,b)=>b.amount-a.amount)[0].customer; //sorts invoices by amount and then gets the first customer in array (the highest invoice)
-        employees[internalid].bestcustomer = bestcustomer; 
+        employees[index].bestcustomer = bestcustomer; 
         return bestcustomer;
     }
 }
 
-export function Calculate2013records(internalid){
-    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === employees[internalid].internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
-    if(employees[internalid].supervisor){ //if not a supervisor
+export function Calculate2013records(index){
+    let filteredrevenue = revenue2013.filter(invoice => {return invoice.Employee === employees[index].internalid});//narrows down the invoice data to the objects that only belongs to the employee, regardless of supervisor status.
+    if(employees[index].supervisor){ //if not a supervisor
         let total = filteredrevenue.reduce((sum, invoice) => parseInt(invoice.amount) + sum, 0); //adds the amounts together of the employees invoices.
-        employees[internalid].actual2013revenue = total.toFixed(2);
+        employees[index].actual2013revenue = total.toFixed(2);
         return total.toFixed(2);
     }
     else{
         let supervisorrevenue = revenue2013.filter(invoice => {return employees[(employees.findIndex(object => {
-            return object.internalid === invoice.Employee}))].supervisor === employees[internalid].internalid });
+            return object.internalid === invoice.Employee}))].supervisor === employees[index].internalid });
         let totalrevenue = supervisorrevenue.concat(filteredrevenue)
         let total = totalrevenue.reduce((sum, invoice) => parseInt(invoice.amount) + sum,0);
-        employees[internalid].actual2013revenue = total.toFixed(2);
+        employees[index].actual2013revenue = total.toFixed(2);
         return total.toFixed(2);
     }
 }
 
-export function IsCommissionMet(internalid, total){
+export function IsCommissionMet(index, total){
     for(let i = 0; i < commissionRules.length; i++){ //looping through to make sure they are a commission employee, otherwise commission = 0. I had to do it this way because if their was an employee added without a commission set there would be an error.
-        if (commissionRules[i].employee === employees[internalid].internalid){
+        if (commissionRules[i].employee === employees[index].internalid){
             let commission = ((parseFloat(commissionRules[i].percentage)/100) * total) //calculates commission regardless if bonus requirement met
-            if(total >= parseInt(employees[internalid]['2012 Revenue'])) commission += parseInt(commissionRules[i].bonus) //checks if bonus requirement met, if so adds to employee's commission.
+            if(total >= parseInt(employees[index]['2012 Revenue'])) commission += parseInt(commissionRules[i].bonus) //checks if bonus requirement met, if so adds to employee's commission.
             return commission.toFixed(2);
         }
     }
