@@ -6,11 +6,11 @@ import Table from 'react-bootstrap/Table';
 
 export default function Invoice() {
     const location = useLocation();
-    const internalID = location.state?.id; //this is used for passing data between sibling components
+    const index = location.state?.id; //this is used for passing data between sibling components
     const name = location.state?.name;
 
     const filteredinvoices = revenue2013.filter(invoice => { //grab only the invoices that pertain to the employee
-        return invoice.Employee === employees[internalID].internalid
+        return invoice.Employee === employees[index].internalid
     })
 
     const mappedinvoices = filteredinvoices.sort((a,b)=>b.amount-a.amount).map(invoice =>{ //create a row in the table for each invoice.
@@ -23,7 +23,7 @@ export default function Invoice() {
     });
 
     const teaminvoices = revenue2013.filter(invoice => {return employees[(employees.findIndex(object => {
-        return object.internalid === invoice.Employee}))].supervisor === employees[internalID].internalid })
+        return object.internalid === invoice.Employee}))].supervisor === employees[index].internalid })
     const mappedteaminvoices = teaminvoices.sort((a,b)=>b.amount-a.amount).map(invoice =>{ //create a row in the table for each invoice.
         return(
         <tr className="bodytext">
@@ -50,7 +50,7 @@ export default function Invoice() {
             </tbody>
         </Table>
         
-        {!employees[internalID].supervisor ? //task 6. If they are a supervisor, show their team's performance as a whole. (currently supports simple supervisor-employee relationships. i.e no nested relationships)
+        {!employees[index].supervisor ? //task 6. If they are a supervisor, show their team's performance as a whole. (currently supports simple supervisor-employee relationships. i.e no nested relationships)
             <div>
             <h1 className="title">{name}'s Team Invoices</h1>
             <Table className="table" striped bordered hover>
