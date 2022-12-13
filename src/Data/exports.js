@@ -5,7 +5,7 @@ export var employees = [
 	{"internalid":"2", "name":"Bob Benson", "email":"bbenson@javascript.com", "birthdate":"7/13/1972", "supervisor":"3", "2012 Revenue":"150000.00", "2013 Revenue":"0.00"},
 	{"internalid":"3", "name":"Chelsea Chastain", "email":"cchastain@javascript.com", "birthdate":"5/7/1968", "supervisor":"", "2012 Revenue":"375000.00", "2013 Revenue":"0.00"},
 	{"internalid":"4", "name":"Dwight Dwyer", "email":"ddwyer@javascript.com", "birthdate":"8/23/1982", "supervisor":"3", "2012 Revenue":"125000.00", "2013 Revenue":"0.00"},
-	{"internalid":"5", "name":"Eathon Eckhart", "email":"eeckhart@javascript.com", "birthdate":"11/28/1970", "supervisor":"", "2012 Revenue":"200000.00", "2013 Revenue":"0.00"},
+	{"internalid":"5", "name":"Eathon Eckhart", "email":"eeckhart@javascript.com", "birthdate":"11/28/1970", "supervisor":"", "2012 Revenue":"200000.00", "2013 Revenue":"0.00"}
 ]; //view the console on the mainpage to view the updated employee data. 
 
 export var revenue2013 = [
@@ -19,7 +19,6 @@ export var revenue2013 = [
 	{"type":"invoice", "customer":"Mary", "Employee":"4", "amount":"20000.00"},
 	{"type":"invoice", "customer":"Nicole", "Employee":"4", "amount":"70000.00"},
 	{"type":"invoice", "customer":"Oscar", "Employee":"5", "amount":"75000.00"},
-	{"type":"invoice", "customer":"Franklin", "Employee":"1", "amount":"50000.00"},
 	{"type":"invoice", "customer":"Patrick", "Employee":"5", "amount":"80000.00"},
 	{"type":"invoice", "customer":"Quin", "Employee":"5", "amount":"60000.00"},
 	{"type":"invoice", "customer":"Rachel", "Employee":"5", "amount":"100000.00"}
